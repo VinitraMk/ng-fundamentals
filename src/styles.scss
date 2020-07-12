@@ -1,1 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Sass imports for common files */
+@import "./assets/scss/common/colors";
+@import "./assets/scss/common/variables";
+@import "./assets/scss/common/functions";
+@import "./assets/scss/common/mixin";
+@import "./assets/scss/common/resets";
+
+
+/* Sass imports for component files */
+
+
+
+/* Sass imports for layout files */
+@import "./assets/scss/layouts/main";
+
+/* Sass imports for override files */
+@import "./assets/scss/overrides/overrides";
+
+/* Sass import for utilities */
+@import "./assets/scss/common/utilities";
+

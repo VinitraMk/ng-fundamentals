@@ -1,0 +1,11 @@
+.thumbnail {
+    background:map-get($gray,"ECECEC");
+    color:map-get($gray,"747487");
+    border-radius:5px;
+    padding:pxToRem(20);
+    min-height: pxToRem(220);
+}
+
+.nav.navbar-nav {
+    font-size:15px;
+}
