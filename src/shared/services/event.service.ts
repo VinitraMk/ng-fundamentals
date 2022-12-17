@@ -16,9 +16,24 @@ export class EventService {
     getEvent(id:number): IEvent {
         return EVENTS.find(event => event.id === id);
     }
+
+    saveEvent(event) {
+        event.id = EVENTS[EVENTS.length - 1].id + 1;
+        event.session = [];
+        EVENTS.push(event);
+    }
+
+    updateEvent(event) {
+        EVENTS = EVENTS.map(x => {
+            if (x.id === event.id) {
+                return event;
+            }
+            return x;
+        })
+    }
 }
 
-const EVENTS : IEvent[] = [
+let EVENTS : IEvent[] = [
     {
         id: 1,
         name: 'Angular Connect',

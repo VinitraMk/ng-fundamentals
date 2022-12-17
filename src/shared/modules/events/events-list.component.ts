@@ -7,7 +7,7 @@ declare let toastr
 
 @Component({
     template:`
-        <h1>Upcoming Angular Events</h1>
+        <h1 class="page-name">Upcoming Angular Events</h1>
         <hr>
         <div class="row">
             <div class="col-md-5" *ngFor="let event of events">

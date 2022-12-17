@@ -1,0 +1,17 @@
+<div class="row m-t-4" *ngFor="let session of sessions">
+    <div class="col-md-10">
+        <collapsible-panel [title]="session.name">
+            <ng-container panel-title>
+                {{session.name}}
+                <i *ngIf="session.voters.length > 3" class="glyphicon glyphicon-fire" style="color: red"></i>
+            </ng-container>
+            <ng-container panel-body>
+                <h6>{{session.presenter}}</h6>
+                <span>Duration: {{session.duration}}</span><br />
+                <span>Level: {{session.level}}</span>
+                <p>{{session.abstract}}</p>
+            </ng-container>
+        </collapsible-panel>
+      
+    </div>
+  </div>

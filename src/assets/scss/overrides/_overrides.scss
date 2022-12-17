@@ -4,8 +4,54 @@
     border-radius:5px;
     padding:pxToRem(20);
     min-height: pxToRem(220);
+    cursor: pointer;
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
+.hoverwell:hover {
+  background-color: #485563;
+  cursor: pointer;
+}
+
+.well {
+  color: white;
+}
+
+.container {
+  padding-top: 10px;
+}
+
+.pointable {
+  cursor: pointer;
+}
+
+button {
+  color: #555;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.toast-success {
+  background-color: #51a351;
+}
+.toast-error {
+  background-color: #bd362f;
+}
+.toast-info {
+  background-color: #2f96b4;
+}
+.toast-warning {
+  background-color: #f89406;
 }
 
 .nav.navbar-nav {
     font-size:15px;
+}
+
+.navbar {
+    margin-bottom: 0;
 }
