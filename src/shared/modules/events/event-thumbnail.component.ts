@@ -6,14 +6,14 @@ import { IEvent } from "src/shared/models/event.model";
     template: `
         <div [routerLink]="['/events',event.id]" class="thumbnail">
             <h2>{{event?.name}}</h2>
-            <div>Date: {{event?.name}}</div>
+            <div>Date: {{event?.date | date:'dd/MM/yy'}}</div>
             <div [ngClass]="getTimeStartClass()" [ngSwitch]="event?.time">
                 Time: {{event?.time}}
                 <span *ngSwitchCase = "'8:00 am'">(Early Start)</span>
                 <span *ngSwitchCase = "'10:00 am'">(Late Start)</span>
                 <span *ngSwitchDefault>(Normal Start)</span>
             </div>
-            <div>Price: \${{event?.price}}</div>
+            <div>Price: {{event?.price | currency:'USD'}}</div>
             <div *ngIf="event?.location">
                 <span>Location: {{event?.location?.address}},</span>
                 <span class="p-l-1">{{event?.location?.city}},</span>

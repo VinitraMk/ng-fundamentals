@@ -8,3 +8,9 @@ export function restrictedWords(words: string[]) {
         return invalidWords && invalidWords.length > 0 ? { 'restrictedWords': invalidWords.join(',')} : null;
     }
 }
+
+export function SortAsc(a:any, b:any, propertyName:string) {
+    if (a[propertyName] > b[propertyName]) return 1;
+    else if (a[propertyName] === b[propertyName]) return 0;
+    else return -1;
+}

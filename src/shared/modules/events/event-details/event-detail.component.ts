@@ -10,6 +10,8 @@ import { IEvent, ISession } from "src/shared/models/event.model";
 export class EventDetailComponent {
     event:IEvent;
     addMode:boolean = false;
+    filterBy: string = 'all';
+    sortBy: string = 'name';
 
     constructor(private eventService:EventService,private route:ActivatedRoute, private router: Router) {
 

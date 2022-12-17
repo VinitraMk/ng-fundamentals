@@ -15,6 +15,7 @@ import { EventListResolver } from 'src/shared/services/event-list-resolver.servi
 import { AuthService } from 'src/shared/modules/user/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CollapsiblePanelComponent } from 'src/shared/components';
+import { DurationPipe } from 'src/shared/pipes';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { CollapsiblePanelComponent } from 'src/shared/components';
     EditEventComponent,
     CreateSessionComponent,
     SessionListComponent,
-    CollapsiblePanelComponent
+    CollapsiblePanelComponent,
+    DurationPipe
   ],
   imports: [
     BrowserModule,
