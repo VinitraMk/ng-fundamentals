@@ -5,3 +5,4 @@ export * from './event-details/create-session.component';
 export * from './edit-event/edit-event.component';
 export * from './new-event/new-event.component';
 export * from './event-details/session-list.component';
+export * from './services/voter.service';

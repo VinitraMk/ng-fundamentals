@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { EventsListComponent, EventThumbnailComponent, EventDetailComponent,
   EditEventComponent, NewEventComponent, SessionListComponent,
-  CreateSessionComponent } from '../shared/modules/events';
+  CreateSessionComponent, VoterService } from '../shared/modules/events';
 import { NavbarComponent } from 'src/shared/modules/nav/navbar.component';
 import { Toastr, TOASTR_TOKEN, EventListResolver, EventRouteActivator, EventService, JQ_TOKEN } from 'src/shared/services';
 import {appRoutes} from "../routes";
@@ -11,7 +11,7 @@ import { RouterModule } from '@angular/router';
 import { Error404Component } from 'src/shared/modules/errors/404.component';
 import { AuthService } from 'src/shared/modules/user/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CollapsiblePanelComponent, SimpleModalComponent } from 'src/shared/components';
+import { CollapsiblePanelComponent, SimpleModalComponent, UpvoteComponent } from 'src/shared/components';
 import { DurationPipe } from 'src/shared/pipes';
 import { ModalTriggerDirective } from 'src/shared/directives';
 
@@ -33,7 +33,8 @@ let jQuery = window['$'];
     CollapsiblePanelComponent,
     DurationPipe,
     SimpleModalComponent,
-    ModalTriggerDirective
+    ModalTriggerDirective,
+    UpvoteComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +48,8 @@ let jQuery = window['$'];
     {provide:TOASTR_TOKEN, useValue: toastr},
     {provide:JQ_TOKEN, useValue:jQuery},
     EventListResolver,
-    AuthService
+    AuthService,
+    VoterService
   ],
   bootstrap: [AppComponent]
 })
