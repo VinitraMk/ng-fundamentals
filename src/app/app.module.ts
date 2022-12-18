@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { EventsListComponent, EventThumbnailComponent, EventDetailComponent,
   EditEventComponent, NewEventComponent, SessionListComponent,
-  CreateSessionComponent, VoterService } from '../shared/modules/events';
+  CreateSessionComponent, VoterService, LocationValidator } from '../shared/modules/events';
 import { NavbarComponent } from 'src/shared/modules/nav/navbar.component';
 import { Toastr, TOASTR_TOKEN, EventListResolver, EventRouteActivator, EventService, JQ_TOKEN } from 'src/shared/services';
 import {appRoutes} from "../routes";
@@ -34,7 +34,8 @@ let jQuery = window['$'];
     DurationPipe,
     SimpleModalComponent,
     ModalTriggerDirective,
-    UpvoteComponent
+    UpvoteComponent,
+    LocationValidator
   ],
   imports: [
     BrowserModule,

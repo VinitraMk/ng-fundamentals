@@ -22,9 +22,10 @@
       <em *ngIf="newEventForm.controls.price?.invalid && (newEventForm.controls.price?.touched)">Required</em>
       <input (ngModel)="newEvent.price" name="price" required id="eventPrice" type="text" type="number" class="form-control" placeholder="event price..." />
     </div>
-    <ng-container ngModelGroup="location">
+    <ng-container ngModelGroup="location" #locationGroup="ngModelGroup" validate-location>
         <div class="form-group">
             <label for="address">Event Location:</label>
+            <em *ngIf="locationGroup?.invalid && locationGroup?.touched">You must enter either the location or online url</em>
             <input (ngModel)="newEvent.address" name="address" id="address" type="text" class="form-control" placeholder="Address of event..." />
         </div>
         <div class="row">
@@ -38,9 +39,10 @@
     </ng-container> 
         
 
-        <div class="form-group">
+      <div class="form-group">
       <label for="onlineUrl">Online Url:</label>
-      <input (ngModel)="newEvent.onlineUrl" name="onlineUrl" id="onlineUrl" type="text" class="form-control" placeholder="Online Url..." />
+      <input (change)="locationGroup.control.controls.address.updateValueAndValidity()" (ngModel)="newEvent.onlineUrl" name="onlineUrl" id="onlineUrl" type="text" 
+      class="form-control" placeholder="Online Url..." />
     </div>
     <div class="form-group" [ngClass]="{'error': newEventForm.controls.imageUrl?.invalid && newEventForm.controls.imageUrl?.touched}">
       <label for="imageUrl">Image:</label>
@@ -50,7 +52,7 @@
       <img class="m-t-3" [src]="newEventForm.controls.imageUrl?.value" *ngIf="newEventForm.controls.imageUrl?.valid"/>
     </div>
     
-    <button type="submit" class="btn btn-primary m-r-2">Save</button>
-    <button type="button" [disabled]="newEventForm.invalid" class="btn btn-default" (click)="cancel()">Cancel</button>
+    <button type="submit" [disabled]="newEventForm.invalid" class="btn btn-primary m-r-2">Save</button>
+    <button type="button" class="btn btn-default" (click)="cancel()">Cancel</button>
   </form>
 </div>
