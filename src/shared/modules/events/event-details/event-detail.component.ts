@@ -1,13 +1,13 @@
-import {Component} from "@angular/core";
+import {Component, OnInit } from "@angular/core";
 import {EventService} from "../../../services/event.service";
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 import { IEvent, ISession } from "src/shared/models/event.model";
 
 @Component({
     templateUrl: './event-details.component.html'
 })
 
-export class EventDetailComponent {
+export class EventDetailComponent implements OnInit {
     event:IEvent;
     addMode:boolean = false;
     filterBy: string = 'all';
@@ -17,9 +17,19 @@ export class EventDetailComponent {
 
     }
 
-    ngOnInit() {
-        this.event = this.eventService.getEvent(+this.route.snapshot.params['id']);
+    resetState() {
+        this.addMode = false;
+        this.sortBy = 'name';
+        this.filterBy = 'all'
     }
+
+    ngOnInit() {
+        this.route.params.forEach((params: Params) => {
+            this.event = this.eventService.getEvent(+params['id']);
+            this.resetState()
+        })
+    }
+
 
     handleEditClick(eventId: number) {
         this.router.navigate([`/events/edit/${eventId}`])

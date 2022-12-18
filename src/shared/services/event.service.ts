@@ -1,4 +1,4 @@
-import {Injectable} from "@angular/core";
+import {Injectable, EventEmitter} from "@angular/core";
 import {Observable, Subject} from "rxjs";
 import { IEvent } from "../models/event.model";
 
@@ -30,6 +30,25 @@ export class EventService {
             }
             return x;
         })
+    }
+
+    searchSessions(searchTerm:string) {
+        var term = searchTerm.toLowerCase();
+        var results = [];
+
+        EVENTS.forEach(event => {
+            var matchingSessions = event.sessions.filter(session => session.name.toLocaleLowerCase().indexOf(term) > -1)
+            matchingSessions = matchingSessions.map((session:any) => {
+                session.eventId = event.id
+                return session
+            });
+            results = results.concat(matchingSessions);
+        })
+        var emitter = new EventEmitter(true);
+        setTimeout(() => {
+            emitter.emit(results)
+        }, 1000)
+        return emitter;
     }
 }
 
