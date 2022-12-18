@@ -1,4 +1,4 @@
-import {Component, OnInit } from "@angular/core";
+import {Component, OnChanges, OnInit } from "@angular/core";
 import {EventService} from "../../../services/event.service";
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { IEvent, ISession } from "src/shared/models/event.model";
@@ -24,12 +24,17 @@ export class EventDetailComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.route.params.forEach((params: Params) => {
-            this.event = this.route.snapshot.data['event'];
-            this.resetState()
+        this.route.data.forEach(data => {
+            this.event = data['event'];
+            this.resetState();
         })
     }
 
+    refreshEvent() {
+        this.eventService.getEvent(this.event.id).subscribe((event: IEvent) => {
+            this.event = event;
+        })
+    }
 
     handleEditClick(eventId: number) {
         this.router.navigate([`/events/edit/${eventId}`])
