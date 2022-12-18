@@ -3,6 +3,7 @@ import {Injectable} from "@angular/core";
 import { EventService } from 'src/shared/services/event.service';
 
 @Injectable()
+// activator removed when observables were introduced for storing data.
 
 export class EventRouteActivator implements CanActivate {
     constructor(private eventService:EventService, private router:Router) {

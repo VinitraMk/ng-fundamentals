@@ -4,3 +4,4 @@ export * from './event.service';
 export * from './jQuery.service';
 export * from './toastr.service';
 export * from './utilities';
+export * from './event.resolver';

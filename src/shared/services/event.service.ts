@@ -1,26 +1,29 @@
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import {Injectable, EventEmitter} from "@angular/core";
-import {Observable, Subject} from "rxjs";
-import { IEvent } from "../models/event.model";
+import {Observable, Subject, of} from "rxjs";
+import { catchError } from "rxjs/operators";
+import { IEvent, ISession } from "../models/event.model";
 
 @Injectable()
 export class EventService {
+
+    constructor(private http: HttpClient) {
+
+    }
+
     getEvents() : Observable<IEvent[]> {
-        let subject = new Subject<IEvent[]>();
-        setTimeout(()=>{
-            subject.next(EVENTS);
-            subject.complete();
-        },2000)
-        return subject;
+        return this.http.get<IEvent[]>('/api/events').pipe(catchError(this.handleError<IEvent[]>('getEvents', [])))
     }
     
-    getEvent(id:number): IEvent {
-        return EVENTS.find(event => event.id === id);
+    getEvent(id:number): Observable<IEvent> {
+        return this.http.get<IEvent>('/api/events/' + id)
+        .pipe(catchError(this.handleError<IEvent>('getEvent', null)));
     }
 
     saveEvent(event) {
-        event.id = EVENTS[EVENTS.length - 1].id + 1;
-        event.session = [];
-        EVENTS.push(event);
+        let options = { headers: new HttpHeaders({'Content-Type': 'application/json'})};
+        return this.http.post<IEvent>('/api/events', event, options)
+        .pipe(catchError(this.handleError<IEvent>('saveEvent')))
     }
 
     updateEvent(event) {
@@ -33,24 +36,19 @@ export class EventService {
     }
 
     searchSessions(searchTerm:string) {
-        var term = searchTerm.toLowerCase();
-        var results = [];
+        return this.http.get<ISession[]>('/api/sessions/search?search=' + searchTerm).pipe(catchError(this.handleError<ISession[]>('searchSessions', [])))
+    }
 
-        EVENTS.forEach(event => {
-            var matchingSessions = event.sessions.filter(session => session.name.toLocaleLowerCase().indexOf(term) > -1)
-            matchingSessions = matchingSessions.map((session:any) => {
-                session.eventId = event.id
-                return session
-            });
-            results = results.concat(matchingSessions);
-        })
-        var emitter = new EventEmitter(true);
-        setTimeout(() => {
-            emitter.emit(results)
-        }, 1000)
-        return emitter;
+    private handleError<T> (operation = 'operation', result?: T) {
+        return (error: any): Observable<T> => {
+            console.log(error);
+            return of(result as T);
+        }
     }
 }
+
+
+// not needed after creating observable and implementing server for this course - ngf-server
 
 let EVENTS : IEvent[] = [
     {

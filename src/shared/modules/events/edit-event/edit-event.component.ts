@@ -26,7 +26,9 @@ export class EditEventComponent implements OnInit {
 
     ngOnInit(): void {
         let eventId = +this.route.snapshot.params['id'];
-        this.newEvent = this.eventService.getEvent(eventId);
+        this.eventService.getEvent(eventId).subscribe((event: IEvent) => {
+            this.newEvent = event;
+        })
     }
 
     cancel() {
@@ -34,7 +36,11 @@ export class EditEventComponent implements OnInit {
     }
 
     updateEvent(formValues): void {
-        this.eventService.updateEvent(formValues);
+        this.newEvent = Object.assign({}, this.newEvent, {
+            ...formValues
+        })
+        console.log(this.newEvent)
+        this.eventService.saveEvent(this.newEvent).subscribe();
         this.isDirty = false;
         this.router.navigate(['/events'])
     }

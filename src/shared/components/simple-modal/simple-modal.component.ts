@@ -13,7 +13,7 @@ export class SimpleModalComponent {
     @Input() title: string;
     @Input() elementId: string;
     @Input() closeOnBodyClick: boolean = false;
-    @ViewChild('modalContainer', '') containerEl: ElementRef;
+    @ViewChild('modalContainer', null) containerEl: ElementRef;
 
     constructor(@Inject(JQ_TOKEN) private $: any) {}
 

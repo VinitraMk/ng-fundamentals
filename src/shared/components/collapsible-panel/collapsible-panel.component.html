@@ -1,6 +1,7 @@
-<div (click)="toggleContent()" class="well pointable">
+<div class="well pointable" [ngClass]="{'open' : visible}">
     <h4 class="well-title">
         <ng-content select="[panel-title]"></ng-content>
+        <i class="glyphicon fc-white float-r" (click)="toggleContent()" [ngClass]="{'glyphicon-plus': !visible, 'glyphicon-minus': visible}"></i>
     </h4>
-    <ng-content *ngIf="visible" select="[panel-body]"></ng-content>
+    <ng-content select="[panel-body]"></ng-content>
 </div>
